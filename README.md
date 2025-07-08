@@ -1,4 +1,4 @@
-# Chipseq-analysis
+# chip_nf
 
 This workflow processes, maps and analises pre-filtered .fastq files from ChIP-seq experiments. The pipeline is optimized for histone marks, but the fragment length parameters can be adjusted for other proteins.
 
