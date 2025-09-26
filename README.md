@@ -85,3 +85,6 @@ The [`run_chipseq.nf`](run_chipseq.nf) script is sent using sbatch to the cluste
 #### Change the metadata.csv file
 The [`metadata.csv`](metadata.csv) file contains the necessary information to pair the input and experimental samples. In the first and second columns, you should place the sample names of the input and the corresponding experimental sample, respectively. Columns 3 to 4 are used to rename the output files according to the antibody and genotype of the samples. Column 5 designs the replicate number.
 
+
+## License
+This project is licensed under the MIT License.
