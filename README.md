@@ -4,7 +4,7 @@ This workflow processes, maps and analises pre-filtered .fastq files from ChIP-s
 
 The main Nextflow script [`chipseq.nf`](chipseq.nf) orchestrates the pipeline by calling the scripts located in the [`Scripts/`](Scripts/) directory. Each script corresponds to a specific step in the workflow:
 
-- [`Mapping.sh`](Scripts/Mapping.sh): Read mapping using HISAT2.
+- [`Mapping.sh`](Scripts/Mapping.sh): Read mapping using Bowtie.
 - [`Post-map-process.sh`](Scripts/Post-map-process.sh): Filtering, sorting and indexing of aligned files.
 - [`Peak-calling.sh`](Scripts/Peak-calling.sh): Peak calling using MACS2.
 - [`Peak-annotation.R`](Scripts/Peak-annotation.R): LiftOver from dm3 to dm6 (only if using dm3); Filtering of non-canonical chromosomes; Annotation of peak features.
