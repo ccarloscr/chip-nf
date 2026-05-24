@@ -1,3 +1,9 @@
-input_code;experiment_code;antibody;condition;replicate;other
-SRR5319101;SRR5319107;H3K4me1;Trr_mut;rep1;single-end, no strand-specific chipseq
-SRR5319102;SRR5319108;H3K4me1;WT;rep1;single-end, no strand-specific chipseq
+sample,fastq_1,fastq_2,control
+WT_rep1,data/WT_rep1_1.fastq.gz,data/WT_rep1_2.fastq.gz,Input_WT_rep1
+WT_rep2,data/WT_rep2_1.fastq.gz,data/WT_rep2_2.fastq.gz,Input_WT_rep2
+Input_WT_rep1,data/Input_WT_rep1_1.fastq.gz,data/Input_WT_rep1_2.fastq.gz,
+Input_WT_rep2,data/Input_WT_rep2_1.fastq.gz,data/Input_WT_rep2_2.fastq.gz,
+PH_rep1,data/PH_rep1_1.fastq.gz,data/PH_rep1_2.fastq.gz,Input_PH_rep1
+PH_rep2,data/PH_rep2_1.fastq.gz,data/PH_rep2_2.fastq.gz,Input_PH_rep2
+Input_PH_rep1,data/Input_PH_rep1_1.fastq.gz,data/Input_PH_rep1_2.fastq.gz,
+Input_PH_rep2,data/Input_PH_rep2_1.fastq.gz,data/Input_PH_rep2_2.fastq.gz,
