@@ -15,44 +15,45 @@ A modular, reproducible Nextflow (DSL2) pipeline for end-to-end ChIP-seq data pr
 
 ```
 chip-nf/
-├── main.nf                        # Main pipeline entry point
-├── nextflow.config                # Pipeline configuration and parameters
-├── metadata.csv                   # Sample sheet (sample, fastq_1, fastq_2, control)
-├── run_chipseq.sh                 # Convenience script to run the pipeline using SLURM
+├── main.nf                            # Main pipeline entry point
+├── nextflow.config                    # Pipeline configuration and parameters
+├── metadata.csv                       # Sample sheet (sample, fastq_1, fastq_2, control)
+├── run_chipseq.sh                     # Convenience script to run the pipeline using SLURM
 ├── README.md
 ├── LICENSE
 ├── .gitignore
 │
-├── modules/                       # Modular Nextflow process definitions
+├── modules/                           # Modular Nextflow process definitions
 │   ├── qc/
-│   │   ├── fastqc.nf              # FastQC on raw and trimmed reads
-│   │   ├── fastp.nf               # Adapter trimming and quality filtering
-│   │   └── multiqc.nf             # Aggregate QC report
+│   │   ├── fastqc.nf                  # FastQC on raw and trimmed reads
+│   │   ├── fastp.nf                   # Adapter trimming and quality filtering
+│   │   └── multiqc.nf                 # Aggregate QC report
 │   ├── alignment/
-│   │   └── bowtie2.nf             # Bowtie2 alignment → sorted, deduplicated BAM
+│   │   └── bowtie2.nf                 # Bowtie2 alignment → sorted, deduplicated BAM
 │   ├── peaks/
-│   │   ├── macs2_narrow.nf        # MACS2 narrow peak calling (TFs)
-│   │   ├── macs2_broad.nf         # MACS2 broad peak calling (histones)
-│   │   ├── merge_peaks.nf         # Consensus peak set across replicates
-│   │   └── deseq2_peaks.nf        # Differential peak analysis with DESeq2
+│   │   ├── macs2_narrow.nf            # MACS2 narrow peak calling (TFs)
+│   │   ├── macs2_broad.nf             # MACS2 broad peak calling (histones)
+│   │   ├── merge_peaks.nf             # Consensus peak set across replicates
+│   │   └── deseq2_peaks.nf            # Differential peak analysis with DESeq2
 │   ├── annotation/
-│   │   └── homer_annot.nf         # Peak annotation with HOMER
+│   │   ├── homer_setup.nf             # Setup the HOMER installation files
+│   │   └── homer_annot.nf             # Peak annotation with HOMER
 │   └── visualization/
-│       ├── pca_peaks.nf           # PCA on consensus peak count matrix
-│       ├── volcano_plot.nf        # Volcano plot of differential peaks
-│       ├── plot_heatmap.nf        # Signal heatmap around peaks
-│       └── genomic_distribution.nf  # Stacked bar: promoter vs intergenic distribution
+│       ├── pca_peaks.nf               # PCA on consensus peak count matrix
+│       ├── volcano_plot.nf            # Volcano plot of differential peaks
+│       ├── plot_heatmap.nf            # Signal heatmap around peaks
+│       └── genomic_distribution.nf      # Stacked bar: promoter vs intergenic distribution
 │
 ├── bin/
-│   └── pca_merged_peaks.R         # R helper script for PCA computation
+│   └── pca_merged_peaks.R             # R helper script for PCA computation
 │
-├── Genomes/                       # Set up this directory with your own genome fasta and GTF
+├── Genomes/                           # Set up this directory with your own genome fasta and GTF
 │   └── dm6
 │ 
-├── data/                          # Raw FASTQ input files (not tracked by git)
+├── data/                              # Raw FASTQ input files (not tracked by git)
 │   └── *.fastq.gz
 │
-└── expected_outputs/              # Reference outputs for pipeline validation
+└── expected_outputs/                  # Reference outputs for pipeline validation
 ```
 
 ---
@@ -94,18 +95,18 @@ FASTQ (paired-end)
                               │
                     ┌─────────┴──────────────┐
                     │                        │
-              HOMER annotation        BEDTools merge
+              HOMER annotation         BEDTools merge
               (per sample)            (consensus peaks)
                     │                        │
               Genomic distribution    HOMER quantification
-              stacked bar plot              │
-                                    ┌───────┴──────────┐
-                                    │                  │
+              stacked bar plot               │
+                                    ┌────────┴──────┐
+                                    │               │
                                   PCA             DESeq2
-                                  plot          │
-                                           Volcano plot
-                                           deepTools heatmap
-                                                   │
+                                  plot              │
+                                              Volcano plot
+                                            deepTools heatmap
+                                                    │
                                               MultiQC report
 ```
 
