@@ -1,0 +1,15 @@
+# .gitignore
+
+# Raw sequencing data
+data/
+
+# Pipeline outputs
+Results/
+
+# Nextflow working directory and cache
+work/
+.nextflow/
+.nextflow.log*
+
+# Conda environments
+conda_envs/
