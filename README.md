@@ -18,7 +18,7 @@ chip-nf/
 ├── main.nf                        # Main pipeline entry point
 ├── nextflow.config                # Pipeline configuration and parameters
 ├── metadata.csv                   # Sample sheet (sample, fastq_1, fastq_2, control)
-├── run_chipseqnf.sh               # Convenience script to run the pipeline using SLURM
+├── run_chipseq.sh                 # Convenience script to run the pipeline using SLURM
 ├── README.md
 ├── LICENSE
 ├── .gitignore
