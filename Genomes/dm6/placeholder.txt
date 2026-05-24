@@ -1,0 +1,5 @@
+1. Change the parentdirectory name to your Genome 
+
+2. Place in this directory your:
+- FASTA genome file
+- GTF annotation file
