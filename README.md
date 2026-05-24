@@ -46,6 +46,9 @@ chip-nf/
 ├── bin/
 │   └── pca_merged_peaks.R         # R helper script for PCA computation
 │
+├── Genomes/                       # Set up this directory with your own genome fasta and GTF
+│   └── dm6
+│ 
 ├── data/                          # Raw FASTQ input files (not tracked by git)
 │   └── *.fastq.gz
 │
