@@ -42,7 +42,7 @@ chip-nf/
 │       ├── pca_peaks.nf               # PCA on consensus peak count matrix
 │       ├── volcano_plot.nf            # Volcano plot of differential peaks
 │       ├── plot_heatmap.nf            # Signal heatmap around peaks
-│       └── genomic_distribution.nf      # Stacked bar: promoter vs intergenic distribution
+│       └── genomic_distribution.nf    # Stacked bar: promoter vs intergenic distribution
 │
 ├── bin/
 │   └── pca_merged_peaks.R             # R helper script for PCA computation
@@ -53,7 +53,7 @@ chip-nf/
 ├── data/                              # Raw FASTQ input files (not tracked by git)
 │   └── *.fastq.gz
 │
-└── expected_outputs/                  # Reference outputs for pipeline validation
+└── expected_plots/                    # Reference plots for pipeline validation
 ```
 
 ---
