@@ -98,7 +98,7 @@ FASTQ (paired-end)
               HOMER annotation         BEDTools merge
               (per sample)            (consensus peaks)
                     │                        │
-              Genomic distribution    HOMER quantification
+              Genomic distribution           │
               stacked bar plot               │
                                     ┌────────┴──────┐
                                     │               │
