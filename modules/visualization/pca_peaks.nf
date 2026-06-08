@@ -49,6 +49,7 @@ process PCA_PEAKS {
         -gtf ${gtf_file} \\
         -cpu ${task.cpus} \\
         -d tagdirs/* \\
+        -raw \\
         > raw_matrix.txt
 
     # 4. Clean header: HOMER writes "tagdirs/<sample> Tag Count" per sample column;
