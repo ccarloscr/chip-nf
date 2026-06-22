@@ -14,6 +14,7 @@ nextflow.enable.dsl=2
 
 
 // Include process definitions from separate module files for better organization and reusability
+include { validateParameters        } from 'plugin/nf-schema'
 include { FASTQC as FASTQC_RAW      } from './modules/qc/fastqc'
 include { FASTP                     } from './modules/qc/fastp'
 include { FASTQC as FASTQC_TRIMMED  } from './modules/qc/fastqc'
@@ -62,6 +63,9 @@ workflow PARSE_SAMPLESHEET {
 
 // Main workflow that orchestrates the entire ChIP-seq processing pipeline
 workflow {
+
+    // --- Schema validation ---
+    validateParameters()
 
     // --- Parse samplesheet ---
     PARSE_SAMPLESHEET(params.metadata)
