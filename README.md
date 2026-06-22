@@ -17,9 +17,11 @@ A modular, reproducible Nextflow (DSL2) pipeline for end-to-end ChIP-seq data pr
 chip-nf/
 ├── main.nf                            # Main pipeline entry point
 ├── nextflow.config                    # Pipeline configuration and parameters
+├── nextflow_schema.json
 ├── metadata.csv                       # Sample sheet (sample, fastq_1, fastq_2, control)
 ├── run_chipseq.sh                     # Convenience script to run the pipeline using SLURM
 ├── README.md
+├── CHANGELOG.md
 ├── LICENSE
 ├── .gitignore
 │
