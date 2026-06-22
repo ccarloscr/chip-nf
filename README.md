@@ -45,7 +45,8 @@ chip-nf/
 │       └── genomic_distribution.nf    # Stacked bar: promoter vs intergenic distribution
 │
 ├── bin/
-│   └── pca_merged_peaks.R             # R helper script for PCA computation
+│   ├── pca_merged_peaks.R             # R helper script for PCA computation
+│   └── deseq2_peaks.R                 # R helper script for differential peak analysis
 │
 ├── Genomes/                           # Set up this directory with your own genome fasta and GTF
 │   └── dm6
@@ -212,11 +213,13 @@ All parameters are defined in `nextflow.config` and can be overridden at the com
 
 ### Core
 
-| Parameter    | Default                                 | Description                         |
-|--------------|-----------------------------------------|-------------------------------------|
-| `genome`     | `dm6`                                   | Genome assembly name                |
-| `metadata`   | `${projectDir}/metadata.csv`            | Path to samplesheet                 |
-| `output_dir` | `${projectDir}/Results`                 | Top-level output directory          |
+| Parameter             | Default                        | Description                         |
+|-----------------------|--------------------------------|-------------------------------------|
+| `genome`              | `dm6`                          | Genome assembly name                |
+| `metadata`            | `${projectDir}/metadata.csv`   | Path to samplesheet                 |
+| `output_dir`          | `${projectDir}/Results`        | Top-level output directory          |
+| `reference_condition` | `Control`                      | Label for reference condition       |
+| `treatment_condition` | `Treatment`                    | Label for treatment condition       |
 
 ### Trimming (fastp)
 
