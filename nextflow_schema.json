@@ -1,0 +1,163 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/your-org/chip-nf/main/nextflow_schema.json",
+    "title": "chip-nf pipeline parameters",
+    "description": "Nextflow ChIP-seq analysis pipeline",
+    "type": "object",
+    "defs": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "description": "Define where the pipeline should find input data and save output.",
+            "required": ["metadata"],
+            "properties": {
+                "metadata": {
+                    "type": "string",
+                    "description": "Path to the sample metadata CSV file. Must have columns: sample, fastq_1, fastq_2, control.",
+                    "format": "file-path",
+                    "mimetype": "text/csv"
+                },
+                "output_dir": {
+                    "type": "string",
+                    "description": "Directory where pipeline results will be saved.",
+                    "default": "./Results"
+                }
+            }
+        },
+        "genome_options": {
+            "title": "Genome options",
+            "type": "object",
+            "description": "Reference genome and annotation settings.",
+            "required": ["genome"],
+            "properties": {
+                "genome": {
+                    "type": "string",
+                    "description": "Reference genome identifier. Must match a folder name under Genomes/.",
+                    "default": "dm6",
+                    "enum": ["dm6"]
+                },
+                "bowtie2_index": {
+                    "type": "string",
+                    "description": "Path prefix to the Bowtie2 genome index. Defaults to Genomes/<genome>/<genome>/<genome>."
+                },
+                "gtf_file": {
+                    "type": "string",
+                    "description": "Path to the GTF annotation file used by HOMER.",
+                    "format": "file-path"
+                }
+            }
+        },
+        "trimming_options": {
+            "title": "Trimming options",
+            "type": "object",
+            "description": "Fastp adapter trimming and quality filtering parameters.",
+            "properties": {
+                "fastp_cut_mean_quality": {
+                    "type": "integer",
+                    "description": "Sliding-window mean quality threshold for fastp --cut_front / --cut_tail.",
+                    "default": 20,
+                    "minimum": 1,
+                    "maximum": 40
+                },
+                "fastp_min_read_length": {
+                    "type": "integer",
+                    "description": "Discard reads shorter than this value after trimming.",
+                    "default": 30,
+                    "minimum": 10
+                }
+            }
+        },
+        "alignment_options": {
+            "title": "Alignment options",
+            "type": "object",
+            "description": "Bowtie2 alignment filtering parameters.",
+            "properties": {
+                "min_mapq": {
+                    "type": "integer",
+                    "description": "Minimum MAPQ score to retain an aligned read.",
+                    "default": 30,
+                    "minimum": 0,
+                    "maximum": 60
+                },
+                "max_insert_size": {
+                    "type": "integer",
+                    "description": "Maximum insert size for paired-end alignment.",
+                    "default": 2000,
+                    "minimum": 100
+                }
+            }
+        },
+        "peak_calling_options": {
+            "title": "Peak calling options",
+            "type": "object",
+            "description": "MACS2 peak calling parameters.",
+            "required": ["peak_mode"],
+            "properties": {
+                "peak_mode": {
+                    "type": "string",
+                    "description": "Peak calling mode. Use 'broad' for histone marks, 'narrow' for transcription factors.",
+                    "default": "broad",
+                    "enum": ["broad", "narrow"]
+                },
+                "genome_size": {
+                    "type": "string",
+                    "description": "Effective genome size for MACS2 (shorthand or integer). See MACS2 docs.",
+                    "default": "dm"
+                },
+                "min_qval": {
+                    "type": "number",
+                    "description": "Minimum q-value (FDR) threshold for MACS2 peak calling.",
+                    "default": 0.01,
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "broad_cutoff": {
+                    "type": "number",
+                    "description": "Cutoff for broad peak calling in MACS2 (used only when peak_mode = 'broad').",
+                    "default": 0.1,
+                    "minimum": 0,
+                    "maximum": 1
+                }
+            }
+        },
+        "differential_analysis_options": {
+            "title": "Differential analysis options",
+            "type": "object",
+            "description": "DESeq2 contrast labelling for differential peak analysis.",
+            "properties": {
+                "reference_condition": {
+                    "type": "string",
+                    "description": "Label for the reference condition in the DESeq2 contrast (e.g. 'WT', 'Control').",
+                    "default": "Control"
+                },
+                "treatment_condition": {
+                    "type": "string",
+                    "description": "Label for the treatment condition in the DESeq2 contrast (e.g. 'PH', 'Treatment').",
+                    "default": "Treatment"
+                }
+            }
+        },
+        "visualization_options": {
+            "title": "Visualization options",
+            "type": "object",
+            "description": "Parameters for plots and visualizations.",
+            "properties": {
+                "volcano_top": {
+                    "type": "integer",
+                    "description": "Number of top differentially expressed peaks to label on the volcano plot.",
+                    "default": 20,
+                    "minimum": 1
+                }
+            }
+        }
+    },
+    "allOf": [
+        { "$ref": "#/defs/input_output_options" },
+        { "$ref": "#/defs/genome_options" },
+        { "$ref": "#/defs/trimming_options" },
+        { "$ref": "#/defs/alignment_options" },
+        { "$ref": "#/defs/peak_calling_options" },
+        { "$ref": "#/defs/differential_analysis_options" },
+        { "$ref": "#/defs/visualization_options" }
+    ]
+}
